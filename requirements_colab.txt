@@ -1,0 +1,20 @@
+Cython==0.29.21
+librosa==0.8.0
+matplotlib  # colab already
+numpy  # colab already
+scipy  # colab already
+tensorboard  # colab already
+torchvision  # colab already
+unidecode
+pyopenjtalk
+jamo
+pypinyin
+jieba  # colab already
+protobuf  # colab already
+cn2an
+inflect  # colab already
+eng_to_ipa
+ko_pron
+indic_transliteration
+num_thai
+opencc
