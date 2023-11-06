@@ -1,0 +1,8 @@
+filetype  # for checking filetype
+chardet  # for moviepy.editor
+moviepy
+pytorch
+pysoundfile  # for torchaudio.load
+torchaudio
+torchvision
+demucs
