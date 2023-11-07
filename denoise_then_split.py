@@ -89,7 +89,7 @@ with tqdm(total=100) as pbar:
             text = seg['text']
             text = lang2token[lang] + text.replace("\n", "") + lang2token[lang]
             text = text + "\n"
-            wav_seg = wavform[:, int(start_time*sample_rate):int(end_time*sample_rate)]  # waveform是一个二维数组
+            wav_seg = waveform[:, int(start_time*sample_rate):int(end_time*sample_rate)]  # waveform是一个二维数组
             wav_seg_name = f"{file_name}_{i}.wav"
             wav_seg_path = dest_dir + wav_seg_name
             annotation.append(wav_seg_path + "|" + text)
