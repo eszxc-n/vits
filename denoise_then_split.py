@@ -81,7 +81,7 @@ with tqdm(total=100) as pbar:
             print(f"{lang} not supported, ignoring...\n")
             continue
         
-        wavform, sample_rate = torchaudio.load(raw_dir + file, channels_first=True)
+        waveform, sample_rate = torchaudio.load(raw_dir + file, channels_first=True)
 
         for i, seg in enumerate(result['segments']):
             start_time = seg['start']
