@@ -60,14 +60,9 @@ with tqdm(total=100) as pbar:
         if type not in ['audio', 'video']:
             continue
 
-        # Video to audio
-        video = VideoFileClip(raw_dir + file)
-        audio = video.audio
-        audio.write_audiofile(raw_dir + file_name + ".wav")
-
         # 用demucs降噪
         print("\nDenoising with demucs:")
-        os.system(f"demucs --two-stems=vocals {raw_dir + file_name}.wav")
+        os.system(f"demucs --two-stems=vocals {raw_dir + file}")
         shutil.copyfile(f".{os.sep}separated{os.sep}htdemucs{os.sep}{file_name}{os.sep}vocals.wav", 
                         f"{raw_dir}denoised_{file_name}.wav")
         shutil.rmtree(f".{os.sep}separated")
@@ -86,7 +81,7 @@ with tqdm(total=100) as pbar:
             print(f"{lang} not supported, ignoring...\n")
             continue
         
-        wavform, sample_rate = torchaudio.load(dest_dir + file, channels_first=True)
+        wavform, sample_rate = torchaudio.load(raw_dir + file, channels_first=True)
 
         for i, seg in enumerate(result['segments']):
             start_time = seg['start']
