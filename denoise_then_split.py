@@ -6,7 +6,7 @@ import filetype
 from tqdm import tqdm
 import whisper
 import torchaudio
-import torch
+from moviepy.editor import VideoFileClip
 
 
 raw_dir = f".{os.sep}raw_data{os.sep}"
@@ -60,12 +60,14 @@ with tqdm(total=100) as pbar:
         if type not in ['audio', 'video']:
             continue
 
+        # Video to audio
+        video = VideoFileClip(raw_dir + file)
+        audio = video.audio
+        audio.write_audiofile(raw_dir + file_name + ".wav")
+
         # 用demucs降噪
-        print("Denoising with demucs:")
-        if torch.cuda.is_available():
-            os.system(f"demucs -d cuda:0 --two-stems=vocals {raw_dir + file}")
-        else:
-            os.system(f"demucs --two-stems=vocals {raw_dir + file}")
+        print("\nDenoising with demucs:")
+        os.system(f"demucs --two-stems=vocals {raw_dir + file_name}.wav")
         shutil.copyfile(f".{os.sep}separated{os.sep}htdemucs{os.sep}{file_name}{os.sep}vocals.wav", 
                         f"{raw_dir}denoised_{file_name}.wav")
         shutil.rmtree(f".{os.sep}separated")
