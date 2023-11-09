@@ -23,7 +23,7 @@ def transcribe_gpu(audio_path):
     result = whisper.decode(model, mel, options)
 
     # print the recognized text
-    print(f"Language: {lang}; Text: {result.text}")
+    print(f"GPU: Language - {lang}; Text - {result.text}")
     return lang, result.text
 
 def transcribe_cpu(audio_path):
